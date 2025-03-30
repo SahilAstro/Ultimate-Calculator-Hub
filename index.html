@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ultimate Calculator Hub - Free online calculators for basic math, BMI, loan, scientific calculations, mortgage, and currency conversion. Accurate and easy to use.">
+    <meta name="keywords" content="calculator, online calculator, math calculator, scientific calculator, bmi calculator, loan calculator, mortgage calculator, currency converter">
+    <meta name="author" content="xAI">
+    <meta name="robots" content="index, follow">
+    <title>Ultimate Calculator Hub - Best Online Calculators 2025</title>
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #9333ea;
+            --accent: #ec4899;
+            --bg-light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+
+        .tab-button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            background: #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .tab-button:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .tab-button.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .calc-section {
+            margin: 20px 0;
+        }
+
+        .input-group {
+            margin: 10px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #475569;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: var(--secondary);
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            display: none;
+            color: #1e293b;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ultimate Calculator Hub</h1>
+        
+        <div class="tabs">
+            <button class="tab-button active" onclick="showTab('basic')">Basic</button>
+            <button class="tab-button" onclick="showTab('scientific')">Scientific</button>
+            <button class="tab-button" onclick="showTab('bmi')">BMI</button>
+            <button class="tab-button" onclick="showTab('loan')">Loan</button>
+            <button class="tab-button" onclick="showTab('mortgage')">Mortgage</button>
+            <button class="tab-button" onclick="showTab('currency')">Currency</button>
+        </div>
+
+        <!-- Basic Calculator -->
+        <div id="basic" class="tab-content active">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>First Number</label>
+                    <input type="number" id="basicNum1" step="any">
+                </div>
+                <div class="input-group">
+                    <label>Operator</label>
+                    <select id="basicOperator">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">×</option>
+                        <option value="/">÷</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Second Number</label>
+                    <input type="number" id="basicNum2" step="any">
+                </div>
+                <button onclick="calculateBasic()">Calculate</button>
+                <div id="basicResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Scientific Calculator -->
+        <div id="scientific" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Number</label>
+                    <input type="number" id="sciNum" step="any">
+                </div>
+                <div class="input-group">
+                    <label>Operation</label>
+                    <select id="sciOperator">
+                        <option value="sqrt">√ Square Root</option>
+                        <option value="pow2">x² Square</option>
+                        <option value="sin">sin</option>
+                        <option value="cos">cos</option>
+                        <option value="tan">tan</option>
+                        <option value="log">log₁₀</option>
+                    </select>
+                </div>
+                <button onclick="calculateScientific()">Calculate</button>
+                <div id="sciResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- BMI Calculator -->
+        <div id="bmi" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Weight (kg)</label>
+                    <input type="number" id="weight" step="0.1">
+                </div>
+                <div class="input-group">
+                    <label>Height (cm)</label>
+                    <input type="number" id="height" step="0.1">
+                </div>
+                <button onclick="calculateBMI()">Calculate BMI</button>
+                <div id="bmiResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Loan Calculator -->
+        <div id="loan" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Loan Amount ($)</label>
+                    <input type="number" id="loanAmount" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Annual Interest Rate (%)</label>
+                    <input type="number" id="interest" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Loan Term (months)</label>
+                    <input type="number" id="months">
+                </div>
+                <button onclick="calculateLoan()">Calculate Payment</button>
+                <div id="loanResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Mortgage Calculator -->
+        <div id="mortgage" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Home Price ($)</label>
+                    <input type="number" id="homePrice" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Down Payment ($)</label>
+                    <input type="number" id="downPayment" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Interest Rate (%)</label>
+                    <input type="number" id="mortgageInterest" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Loan Term (years)</label>
+                    <input type="number" id="mortgageYears">
+                </div>
+                <button onclick="calculateMortgage()">Calculate</button>
+                <div id="mortgageResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Currency Converter -->
+        <div id="currency" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Amount</label>
+                    <input type="number" id="currencyAmount" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>From Currency</label>
+                    <select id="fromCurrency">
+                        <option value="1">USD</option>
+                        <option value="0.85">EUR</option>
+                        <option value="0.73">GBP</option>
+                        <option value="110.15">JPY</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>To Currency</label>
+                    <select id="toCurrency">
+                        <option value="1">USD</option>
+                        <option value="0.85">EUR</option>
+                        <option value="0.73">GBP</option>
+                        <option value="110.15">JPY</option>
+                    </select>
+                </div>
+                <button onclick="convertCurrency()">Convert</button>
+                <div id="currencyResult" class="result"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`[onclick="showTab('${tabId}')"]`).classList.add('active');
+        }
+
+        function validateInput(...inputs) {
+            return inputs.every(input => input !== '' && !isNaN(input) && input !== null);
+        }
+
+        function calculateBasic() {
+            const num1 = parseFloat(document.getElementById('basicNum1').value);
+            const num2 = parseFloat(document.getElementById('basicNum2').value);
+            const operator = document.getElementById('basicOperator').value;
+            let result;
+
+            if (!validateInput(num1, num2)) {
+                alert('Please enter valid numbers');
+                return;
+            }
+
+            switch(operator) {
+                case '+': result = num1 + num2; break;
+                case '-': result = num1 - num2; break;
+                case '*': result = num1 * num2; break;
+                case '/': result = num2 !== 0 ? num1 / num2 : 'Error: Division by zero'; break;
+            }
+
+            const resultDiv = document.getElementById('basicResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Result: ${typeof result === 'number' ? result.toFixed(4) : result}`;
+        }
+
+        function calculateScientific() {
+            const num = parseFloat(document.getElementById('sciNum').value);
+            const operator = document.getElementById('sciOperator').value;
+            let result;
+
+            if (!validateInput(num)) {
+                alert('Please enter a valid number');
+                return;
+            }
+
+            switch(operator) {
+                case 'sqrt': result = num >= 0 ? Math.sqrt(num) : 'Error: Negative number'; break;
+                case 'pow2': result = Math.pow(num, 2); break;
+                case 'sin': result = Math.sin(num * Math.PI / 180); break;
+                case 'cos': result = Math.cos(num * Math.PI / 180); break;
+                case 'tan': result = Math.tan(num * Math.PI / 180); break;
+                case 'log': result = num > 0 ? Math.log10(num) : 'Error: Negative or zero'; break;
+            }
+
+            const resultDiv = document.getElementById('sciResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Result: ${typeof result === 'number' ? result.toFixed(6) : result}`;
+        }
+
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById('weight').value);
+            const height = parseFloat(document.getElementById('height').value) / 100;
+
+            if (!validateInput(weight, height) || height <= 0) {
+                alert('Please enter valid weight and height');
+                return;
+            }
+
+            const bmi = weight / (height * height);
+            const resultDiv = document.getElementById('bmiResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Your BMI: ${bmi.toFixed(2)}`;
+        }
+
+        function calculateLoan() {
+            const amount = parseFloat(document.getElementById('loanAmount').value);
+            const interest = parseFloat(document.getElementById('interest').value) / 100 / 12;
+            const months = parseFloat(document.getElementById('months').value);
+
+            if (!validateInput(amount, interest, months) || amount <= 0 || months <= 0) {
+                alert('Please enter valid loan details');
+                return;
+            }
+
+            const monthlyPayment = (amount * interest * Math.pow(1 + interest, months)) / 
+                                 (Math.pow(1 + interest, months) - 1);
+            const totalPayment = monthlyPayment * months;
+
+            const resultDiv = document.getElementById('loanResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Monthly Payment: $${monthlyPayment.toFixed(2)}<br>Total Payment: $${totalPayment.toFixed(2)}`;
+        }
+
+        function calculateMortgage() {
+            const price = parseFloat(document.getElementById('homePrice').value);
+            const downPayment = parseFloat(document.getElementById('downPayment').value);
+            const interest = parseFloat(document.getElementById('mortgageInterest').value) / 100 / 12;
+            const years = parseFloat(document.getElementById('mortgageYears').value);
+            const months = years * 12;
+
+            if (!validateInput(price, downPayment, interest, years) || price <= downPayment || years <= 0) {
+                alert('Please enter valid mortgage details');
+                return;
+            }
+
+            const loanAmount = price - downPayment;
+            const monthlyPayment = (loanAmount * interest * Math.pow(1 + interest, months)) / 
+                                 (Math.pow(1 + interest, months) - 1);
+            const totalPayment = monthlyPayment * months;
+
+            const resultDiv = document.getElementById('mortgageResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Monthly Payment: $${monthlyPayment.toFixed(2)}<br>Total Interest: $${(totalPayment - loanAmount).toFixed(2)}`;
+        }
+
+        function convertCurrency() {
+            const amount = parseFloat(document.getElementById('currencyAmount').value);
+            const fromRate = parseFloat(document.getElementById('fromCurrency').value);
+            const toRate = parseFloat(document.getElementById('toCurrency').value);
+
+            if (!validateInput(amount)) {
+                alert('Please enter a valid amount');
+                return;
+            }
+
+            const result = (amount / fromRate) * toRate;
+            const resultDiv = document.getElementById('currencyResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Result: ${result.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
