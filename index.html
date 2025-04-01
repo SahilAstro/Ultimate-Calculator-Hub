@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2012080622294599" crossorigin="anonymous"></script></head>
+  
+  <!-- Google Adsense -->
+  <head><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2012080622294599"
+     crossorigin="anonymous"></script>
+  </head>
+  <!-- /Google Adsense -->
+  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ultimate Calculator Hub - Free online calculators for basic math, BMI, loan, scientific calculations, mortgage, and currency conversion. Accurate and easy to use.">
-    <meta name="keywords" content="calculator, online calculator, math calculator, scientific calculator, bmi calculator, loan calculator, mortgage calculator, currency converter">
+    <meta name="description" content="Ultimate Calculator Hub - Free online calculators for math, scientific, BMI, loan, mortgage, percentage, GST, EMI, age, date difference, profit/loss, and eCommerce. Accurate and user-friendly.">
+    <meta name="keywords" content="calculator, online calculator, math calculator, scientific calculator, bmi calculator, loan calculator, mortgage calculator, percentage calculator, GST calculator, EMI calculator, age calculator, date calculator, profit loss calculator, ecommerce calculator">
     <meta name="author" content="xAI">
     <meta name="robots" content="index, follow">
-    <title>Ultimate Calculator Hub - Best Online Calculators 2025</title>
+    <title>Ultimate Calculator Hub - All-in-One Online Calculators 2025</title>
     
     <style>
         :root {
@@ -16,6 +22,8 @@
             --secondary: #9333ea;
             --accent: #ec4899;
             --bg-light: #f8fafc;
+            --gold: #FFD700;
+            --silver: #C0C0C0;
         }
 
         * {
@@ -33,7 +41,7 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             background: var(--bg-light);
             border-radius: 15px;
@@ -63,13 +71,14 @@
         }
 
         .tab-button {
-            padding: 12px 25px;
+            padding: 12px 20px;
             border: none;
             border-radius: 25px;
             background: #e2e8f0;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 500;
+            font-size: 0.9em;
         }
 
         .tab-button:hover {
@@ -150,12 +159,62 @@
             color: #1e293b;
         }
 
+        hr {
+            border: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 40px 0;
+        }
+
+        .facts-section {
+            margin-top: 40px;
+        }
+
+        details {
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        summary {
+            font-weight: bold;
+            color: var(--gold);
+            padding: 10px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        details p {
+            padding: 15px;
+            color: #333;
+        }
+
+        ul {
+            list-style-type: disc;
+            margin-left: 30px;
+            padding: 10px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
         @media (max-width: 600px) {
             .container {
                 padding: 20px;
             }
             h1 {
                 font-size: 2em;
+            }
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 0.85em;
             }
         }
     </style>
@@ -170,7 +229,13 @@
             <button class="tab-button" onclick="showTab('bmi')">BMI</button>
             <button class="tab-button" onclick="showTab('loan')">Loan</button>
             <button class="tab-button" onclick="showTab('mortgage')">Mortgage</button>
-            <button class="tab-button" onclick="showTab('currency')">Currency</button>
+            <button class="tab-button" onclick="showTab('percentage')">Percentage</button>
+            <button class="tab-button" onclick="showTab('gst')">GST</button>
+            <button class="tab-button" onclick="showTab('emi')">EMI</button>
+            <button class="tab-button" onclick="showTab('age')">Age</button>
+            <button class="tab-button" onclick="showTab('dateDiff')">Date Difference</button>
+            <button class="tab-button" onclick="showTab('profitLoss')">Profit/Loss</button>
+            <button class="tab-button" onclick="showTab('ecommerce')">eCommerce</button>
         </div>
 
         <!-- Basic Calculator -->
@@ -281,35 +346,185 @@
             </div>
         </div>
 
-        <!-- Currency Converter -->
-        <div id="currency" class="tab-content">
+        <!-- Percentage Calculator -->
+        <div id="percentage" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Number</label>
+                    <input type="number" id="percentNum" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Percentage (%)</label>
+                    <input type="number" id="percentValue" step="0.01">
+                </div>
+                <button onclick="calculatePercentage()">Calculate</button>
+                <div id="percentResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- GST Calculator -->
+        <div id="gst" class="tab-content">
             <div class="calc-section">
                 <div class="input-group">
                     <label>Amount</label>
-                    <input type="number" id="currencyAmount" step="0.01">
+                    <input type="number" id="gstAmount" step="0.01">
                 </div>
                 <div class="input-group">
-                    <label>From Currency</label>
-                    <select id="fromCurrency">
-                        <option value="1">USD</option>
-                        <option value="0.85">EUR</option>
-                        <option value="0.73">GBP</option>
-                        <option value="110.15">JPY</option>
-                    </select>
+                    <label>GST Rate (%)</label>
+                    <input type="number" id="gstRate" step="0.01">
                 </div>
-                <div class="input-group">
-                    <label>To Currency</label>
-                    <select id="toCurrency">
-                        <option value="1">USD</option>
-                        <option value="0.85">EUR</option>
-                        <option value="0.73">GBP</option>
-                        <option value="110.15">JPY</option>
-                    </select>
-                </div>
-                <button onclick="convertCurrency()">Convert</button>
-                <div id="currencyResult" class="result"></div>
+                <button onclick="calculateGST()">Calculate</button>
+                <div id="gstResult" class="result"></div>
             </div>
         </div>
+
+        <!-- EMI Calculator -->
+        <div id="emi" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Loan Amount</label>
+                    <input type="number" id="emiAmount" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Interest Rate (% p.a.)</label>
+                    <input type="number" id="emiInterest" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Tenure (months)</label>
+                    <input type="number" id="emiTenure">
+                </div>
+                <button onclick="calculateEMI()">Calculate EMI</button>
+                <div id="emiResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Age Calculator -->
+        <div id="age" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Date of Birth (YYYY-MM-DD or use calendar)</label>
+                    <input type="text" id="dobText" placeholder="e.g., 1990-01-01">
+                    <input type="date" id="dobCalendar">
+                </div>
+                <button onclick="calculateAge()">Calculate Age</button>
+                <div id="ageResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Date Difference Calculator -->
+        <div id="dateDiff" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Start Date (YYYY-MM-DD or use calendar)</label>
+                    <input type="text" id="startDateText" placeholder="e.g., 2020-01-01">
+                    <input type="date" id="startDateCalendar">
+                </div>
+                <div class="input-group">
+                    <label>End Date (YYYY-MM-DD or use calendar)</label>
+                    <input type="text" id="endDateText" placeholder="e.g., 2025-03-31">
+                    <input type="date" id="endDateCalendar">
+                </div>
+                <button onclick="calculateDateDiff()">Calculate Difference</button>
+                <div id="dateDiffResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- Profit Loss Calculator -->
+        <div id="profitLoss" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Cost Price</label>
+                    <input type="number" id="costPrice" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Selling Price</label>
+                    <input type="number" id="sellingPrice" step="0.01">
+                </div>
+                <button onclick="calculateProfitLoss()">Calculate</button>
+                <div id="profitLossResult" class="result"></div>
+            </div>
+        </div>
+
+        <!-- eCommerce Profit Loss Calculator -->
+        <div id="ecommerce" class="tab-content">
+            <div class="calc-section">
+                <div class="input-group">
+                    <label>Total Revenue</label>
+                    <input type="number" id="ecomRevenue" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Cost of Goods Sold</label>
+                    <input type="number" id="ecomCOGS" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Operating Expenses</label>
+                    <input type="number" id="ecomExpenses" step="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Marketing Costs</label>
+                    <input type="number" id="ecomMarketing" step="0.01">
+                </div>
+                <button onclick="calculateEcommerce()">Calculate</button>
+                <div id="ecomResult" class="result"></div>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Interesting Facts Section -->
+        <div class="facts-section">
+            <h2 style="text-align: center; color: var(--primary);">Fascinating Calculator Facts</h2>
+            
+            <details>
+                <summary>The Evolution of Calculators</summary>
+                <p>
+                    <ul>
+                        <li>The abacus, one of the earliest calculating tools, dates back to 2400 BCE in Mesopotamia.</li>
+                        <li>Blaise Pascal invented the first mechanical calculator, the Pascaline, in 1642 at age 19.</li>
+                        <li>The first electronic desktop calculator, the ANITA, was released in 1961.</li>
+                        <li>Today’s calculators can perform millions of calculations per second!</li>
+                    </ul>
+                </p>
+            </details>
+
+            <details>
+                <summary>Calculator Fun Facts</summary>
+                <p>
+                    <ul>
+                        <li>Typing "5318008" upside down on a calculator spells "BOOBIES" – a classic school prank!</li>
+                        <li>The shortest war in history lasted 38 minutes, calculable with our Date Difference tool.</li>
+                        <li>Some calculators have a hidden "easter egg" feature – try pressing random keys!</li>
+                        <li>The TI-83 graphing calculator from 1996 is still used in schools today.</li>
+                    </ul>
+                </p>
+            </details>
+
+            <details>
+                <summary>Math Behind the Magic</summary>
+                <p>
+                    <ul>
+                        <li>Our scientific calculator uses radians for trig functions, converting degrees internally.</li>
+                        <li>The EMI formula uses compound interest: P × r × (1 + r)^n / ((1 + r)^n - 1).</li>
+                        <li>BMI is a simple ratio: weight (kg) / height² (m), yet it’s a global health standard.</li>
+                        <li>Logarithms, used in our scientific calc, were invented by John Napier in 1614.</li>
+                    </ul>
+                </p>
+            </details>
+
+            <details>
+                <summary>Why Calculators Matter</summary>
+                <p>
+                    <ul>
+                        <li>They save time – imagine manually calculating a 30-year mortgage!</li>
+                        <li>Financial calculators help millions make informed decisions daily.</li>
+                        <li>Scientific calculators are essential for engineers and scientists worldwide.</li>
+                        <li>This site offers 12 unique calculators – all free and precise!</li>
+                    </ul>
+                </p>
+            </details>
+        </div>
+
+        <hr>
     </div>
 
     <script>
@@ -427,21 +642,179 @@
             resultDiv.innerHTML = `Monthly Payment: $${monthlyPayment.toFixed(2)}<br>Total Interest: $${(totalPayment - loanAmount).toFixed(2)}`;
         }
 
-        function convertCurrency() {
-            const amount = parseFloat(document.getElementById('currencyAmount').value);
-            const fromRate = parseFloat(document.getElementById('fromCurrency').value);
-            const toRate = parseFloat(document.getElementById('toCurrency').value);
+        function calculatePercentage() {
+            const num = parseFloat(document.getElementById('percentNum').value);
+            const percent = parseFloat(document.getElementById('percentValue').value);
 
-            if (!validateInput(amount)) {
-                alert('Please enter a valid amount');
+            if (!validateInput(num, percent)) {
+                alert('Please enter valid numbers');
                 return;
             }
 
-            const result = (amount / fromRate) * toRate;
-            const resultDiv = document.getElementById('currencyResult');
+            const result = (num * percent) / 100;
+            const resultDiv = document.getElementById('percentResult');
             resultDiv.style.display = 'block';
-            resultDiv.textContent = `Result: ${result.toFixed(2)}`;
+            resultDiv.textContent = `${percent}% of ${num} = ${result.toFixed(2)}`;
+        }
+
+        function calculateGST() {
+            const amount = parseFloat(document.getElementById('gstAmount').value);
+            const rate = parseFloat(document.getElementById('gstRate').value);
+
+            if (!validateInput(amount, rate) || amount < 0 || rate < 0) {
+                alert('Please enter valid amount and rate');
+                return;
+            }
+
+            const gst = (amount * rate) / 100;
+            const total = amount + gst;
+            const resultDiv = document.getElementById('gstResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `GST Amount: $${gst.toFixed(2)}<br>Total Amount: $${total.toFixed(2)}`;
+        }
+
+        function calculateEMI() {
+            const amount = parseFloat(document.getElementById('emiAmount').value);
+            const interest = parseFloat(document.getElementById('emiInterest').value) / 100 / 12;
+            const tenure = parseFloat(document.getElementById('emiTenure').value);
+
+            if (!validateInput(amount, interest, tenure) || amount <= 0 || tenure <= 0) {
+                alert('Please enter valid EMI details');
+                return;
+            }
+
+            const emi = (amount * interest * Math.pow(1 + interest, tenure)) / 
+                       (Math.pow(1 + interest, tenure) - 1);
+            const total = emi * tenure;
+
+            const resultDiv = document.getElementById('emiResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Monthly EMI: $${emi.toFixed(2)}<br>Total Payment: $${total.toFixed(2)}`;
+        }
+
+        function calculateAge() {
+            const dobText = document.getElementById('dobText').value;
+            const dobCalendar = document.getElementById('dobCalendar').value;
+            const dob = dobText ? new Date(dobText) : new Date(dobCalendar);
+            const today = new Date();
+
+            if (isNaN(dob.getTime()) || dob > today) {
+                alert('Please enter a valid date of birth');
+                return;
+            }
+
+            let years = today.getFullYear() - dob.getFullYear();
+            let months = today.getMonth() - dob.getMonth();
+            let days = today.getDate() - dob.getDate();
+
+            if (days < 0) {
+                months--;
+                days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            }
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            const resultDiv = document.getElementById('ageResult');
+            resultDiv.style.display = 'block';
+            resultDiv.textContent = `Age: ${years} years, ${months} months, ${days} days`;
+        }
+
+        function calculateDateDiff() {
+            const startText = document.getElementById('startDateText').value;
+            const startCalendar = document.getElementById('startDateCalendar').value;
+            const endText = document.getElementById('endDateText').value;
+            const endCalendar = document.getElementById('endDateCalendar').value;
+
+            const start = startText ? new Date(startText) : new Date(startCalendar);
+            const end = endText ? new Date(endText) : new Date(endCalendar);
+
+            if (isNaN(start.getTime()) || isNaN(end.getTime()) || start > end) {
+                alert('Please enter valid dates');
+                return;
+            }
+
+            const diffMs = end - start;
+            const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const months = Math.floor(days / 30.44); // Average month length
+            const years = Math.floor(days / 365.25); // Average year length
+
+            const resultDiv = document.getElementById('dateDiffResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Difference:<br>${days} days<br>${months} months (approx)<br>${years} years (approx)`;
+        }
+
+        function calculateProfitLoss() {
+            const cost = parseFloat(document.getElementById('costPrice').value);
+            const selling = parseFloat(document.getElementById('sellingPrice').value);
+
+            if (!validateInput(cost, selling) || cost < 0 || selling < 0) {
+                alert('Please enter valid prices');
+                return;
+            }
+
+            const profitLoss = selling - cost;
+            const percent = (profitLoss / cost) * 100;
+
+            const resultDiv = document.getElementById('profitLossResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = profitLoss >= 0 ? 
+                `Profit: $${profitLoss.toFixed(2)}<br>Profit %: ${percent.toFixed(2)}%` :
+                `Loss: $${Math.abs(profitLoss).toFixed(2)}<br>Loss %: ${Math.abs(percent).toFixed(2)}%`;
+        }
+
+        function calculateEcommerce() {
+            const revenue = parseFloat(document.getElementById('ecomRevenue').value);
+            const cogs = parseFloat(document.getElementById('ecomCOGS').value);
+            const expenses = parseFloat(document.getElementById('ecomExpenses').value);
+            const marketing = parseFloat(document.getElementById('ecomMarketing').value);
+
+            if (!validateInput(revenue, cogs, expenses, marketing) || revenue < 0 || cogs < 0 || expenses < 0 || marketing < 0) {
+                alert('Please enter valid values');
+                return;
+            }
+
+            const grossProfit = revenue - cogs;
+            const netProfit = grossProfit - expenses - marketing;
+            const profitMargin = (netProfit / revenue) * 100;
+
+            const resultDiv = document.getElementById('ecomResult');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `Gross Profit: $${grossProfit.toFixed(2)}<br>Net Profit: $${netProfit.toFixed(2)}<br>Profit Margin: ${profitMargin.toFixed(2)}%`;
         }
     </script>
 </body>
+<footer>
+  <table border="0" width="100%" background="/IMG_20250305_232213.png">
+    <tr>
+      <td>
+        <center>
+          <img src="/Gmail_icon_(2020)_1.svg.png" height="50"><br>
+          <u><b>Email Us</b></u><br>
+          <font size="1">
+            <p>sahilnepali1st<br>@gmail.com</p>
+          </font>
+        </center>
+      </td>
+      <td>
+        <center>
+          <img src="/piclumen-1741245231841_1.png" height="50"><br><u>
+            <b>Location</b></u><br>
+          <p><b>Nepal🇳🇵</b></p>
+        </center>
+      </td>
+      <td>
+        <center>
+          <a href="help.html"><img src="/2791231 (1).png" height="50"><br></a>
+          <b><u>Help?</u></b><br>
+          <font size="2">
+            <p>Touch</p>
+          </font>
+        </center>
+      </td>
+      
+    </tr>
+  </table>
+</footer>
 </html>
